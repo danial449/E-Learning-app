@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}My Courses{% endblock title %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'teachers/css/teacher_courses.css'%}">{% endblock css %}
+{% block content %}
+<!-- ============Our Course Section Start============ -->
+<div style="background-color: #1D1D1D;" class="container-fluid p-5">
+    <div class="row py-3">
+        <div class="col-md-12 ">
+            <h2 style="font-size: 36px;
+            font-weight: 700;
+            color: #ffffff;
+            text-align: left;">My Courses</h2>
+        </div>
+    </div>
+</div>
+<!-- Our Course Service End -->
+
+<!-- ============Course Section Start============ -->
+{% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-success m-0" role="alert">
+           {{message}}
+          </div>
+          
+        {% endfor %}
+{% endif %}
+<div class="container-fluid mt-5">
+    <div class="row justify-content-center align-items-center">
+        {% for enrollment in enrollments %}
+            <div class="col-md-3 mb-4">
+                <a class="text-decoration-none" href="{% url "teachers:course_detail_view" enrollment.course.id %}">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-image">
+                        <img src="{{ enrollment.course.course_image.url }}" alt="{{ enrollment.course.name }}">
+                    </div>
+    
+                    <div class="card-body">
+                        <h5 class="card-title">{{ enrollment.course.name  }}</h5>
+                        <div class="book-btn text-white">
+                            <a style="background-color:#FBD232;" href="{% url "teachers:course_detail_view" enrollment.course.id %}" class="btn btn-primary">View Course</a>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<!-- Course Section End -->
+{% endblock content %}

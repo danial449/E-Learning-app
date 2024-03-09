@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}All Courses{% endblock title %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'teachers/css/teacher_courses.css'%}">{% endblock css %}
+{% block content %}
+<!-- ============Our Service Section Start============ -->
+<div style="background-color: #1D1D1D;" class="container-fluid p-5">
+    <div class="row py-3">
+        <div class="col-md-12 ">
+            <h2 style="font-size: 36px;
+            font-weight: 700;
+            color: #ffffff;
+            text-align: left;">All Courses</h2>
+        </div>
+    </div>
+</div>
+<!-- Our Section Service End -->
+
+<!-- ============Services Section Start============ -->
+{% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-success m-0" role="alert">
+           {{message}}
+          </div>
+          
+        {% endfor %}
+{% endif %}
+<div class="container-fluid mt-5">
+    <div class="row justify-content-center align-items-center">
+        {% for course in courses %}
+            <div class="col-md-3 mb-4">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-image">
+                        <img src="{{ course.course_image.url }}" alt="{{ course.name }}">
+                    </div>
+    
+                    <div class="card-body">
+                        <h5 class="card-title">{{ course.name  }}</h5>
+                        {% if course.id in enrolled_courses_ids %}
+                            <div class="text-muted">Enrolled</div>
+                        {% else %}
+                        <div class="book-btn">
+                            <a href="{% url 'students:enroll_course_view' course.id %}" class="btn">Enroll Now</a>
+                        </div>
+                        {% endif %}
+                        
+    
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<!-- Services Section End -->
+{% endblock content %}

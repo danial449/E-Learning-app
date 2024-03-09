@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Results{% endblock title %}
+{% block content %}
+{% if students %}
+<h3>Students</h3>
+<ul>
+    {% for student in students %}
+        <li>{{ student.first_name }} {{ student.last_name }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+
+{% if teachers %}
+<h3>Teachers</h3>
+<ul>
+    {% for teacher in teachers %}
+        <li>{{ teacher.first_name }} {{ teacher.last_name }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+{% endblock content %}

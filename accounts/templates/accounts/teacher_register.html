@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Register{% endblock title %}
+{% block css %}<link rel="stylesheet" href="{% static 'accounts/css/teacher_register.css'%}">{% endblock css %}
+{% block content %}
+<div class="container-fluid main">
+    <div class="wrapper ">
+        <div class="form-box login">
+            <h2>Register</h2>
+            {% if form.errors %}
+            <ul>
+                {% for field, errors in form.errors.items %}
+                    {% for error in errors %}
+                        <li>{{ field|title }}: {{ error }}</li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="person"></ion-icon></span>
+                    <input type="text" name="first_name" required>
+                    <label for="">First Name</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="person"></ion-icon></span>
+                    <input type="text" name="last_name" required>
+                    <label for="">Last Name</label>
+                </div>
+
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="person-circle"></ion-icon></span>
+                    <input type="text" name="username" required>
+                    <label for="">Username</label>
+                </div>
+
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                    <input type="text" name="email" required>
+                    <label for="">Email</label>
+                </div>
+
+                <div class="input-box">
+                    <label for="profile_image">Profile</label>
+                    <input class="px-5 mx-3 pt-2" type="file" id="profile_image" name="image" required>
+                </div>
+
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                    <input type="password" name="password1" required>
+                    <label for="">Password</label>
+                </div>
+
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                    <input type="password" name="password2" required>
+                    <label for="">Confirm Password</label>
+                </div>
+
+                <button type="submit" class="submit-register-btn">Register</button>
+
+                <div class="login-as-service-provider">
+                    <p>Register as Student! <a href="{% url "accounts:student_register_view" %}" class="login-link">Register</a></p>
+                </div>
+                <div class="login-register">
+                    <p>Already have an account? <a href="{% url "accounts:user_login_view" %}" class="register-link">Login</a></p>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

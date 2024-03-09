@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Course Detail{% endblock title %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'teachers/css/course_detail.css'%}">{% endblock css %}
+{% block content %}
+{% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-success m-0" role="alert">
+           {{message}}
+          </div>
+          
+        {% endfor %}
+{% endif %}
+<div class="container-fluid">
+    <div class="row justify-content-center py-5">
+        <div class="col-md-8">
+            <div class="post-image">
+                <img src="{{course.course_image.url}}" alt="img" loading="lazy">
+            </div>
+            <div class="post-info d-flex">
+                <h5><span><ion-icon name="chatbubbles"></ion-icon></span>{{ course.feedback.all|length }}
+                </h5>
+            </div>
+
+            <div class="author d-flex">
+                <h6><ion-icon name="person-circle-outline"></ion-icon>{{course.teacher}}</h6>
+
+            </div>
+            <div class="post-content">
+                <h3>{{course.name}}</h3>
+                <p>{{course.description}}</p>
+                {% if course.course_pdf %}
+                <a href="{{ course.course_pdf.url }}" download>Download PDF</a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-md-4 recent-post-section">
+            <h3>Enrolled Students</h3>
+            <div class="recent-post">
+                {% if enrollments %}
+                <ul>
+                    {% for enrollment in enrollments %}
+                    <li class="py-1">{{enrollment.student.first_name }} {{ enrollment.student.last_name }}
+                        {% if user.is_teacher %}
+                        <a class="btn btn-danger py-1" href="{% url 'teachers:cancel_enrollment_view' enrollment.id course.id %}">Remove</a>
+                        {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p>No Enrollments</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-md-12 d-flex justify-content-center comment-section py-5">
+            <div class="comments p-3">
+                <h4>Feedbacks:</h4>
+                {% if feedback %}
+                {% for feedback in feedback %}
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <h6 style="font-style: italic; font-size: 12px;" class="card-subtitle mb-2 text-muted">
+                            @{{feedback.student}} on
+                            {{feedback.created_date|date:"j F, Y"}}</h6>
+                        <p class="card-text">{{feedback.feedback_text}}</p>
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <p class="text-muted">No Feedback!</p>
+                {% endif %}
+            </div>
+            <div class="comment-form p-3">
+                <h4>Leave Your Feedback</h4>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <textarea name="feedback_text" id="" cols="60" rows="8"
+                        placeholder="Enter Feedback Here.."></textarea>
+                    <input type="hidden" name="student" value="{{ request.user.id }}">
+                    <input type="hidden" name="course" value="{{ course.id }}">
+                    <div> <button class="btn btn-primary" type="submit">Submit</button></div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

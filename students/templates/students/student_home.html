@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Home{% endblock title %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'students/css/student_home.css'%}">{% endblock css %}
+{% block content %}
+<!--Notification-->
+<header>
+    <div class = "icons">
+    <div class = "notification">
+      <a href = "#">
+      <div class = "notBtn" href = "#">
+        <!--Number supports double digets and automaticly hides itself when there is nothing between divs -->
+        <div class = "number">{{ total_notifications }}</div>
+        <h3>Notifications</h3>
+          <div class = "box">
+            <div class = "display">
+              <div class = "nothing"> 
+                <div class = "cent">Looks Like your all caught up!</div>
+              </div>
+              <div class = "cont"><!-- Fold this div and try deleting evrything inbetween -->
+                {% if notifications %}
+                {% for notification in notifications %}
+                <div class = "sec new">
+                    <div class = "profCont">
+                     </div>
+                    <div class = "txt">{{ notification.message }}</div>
+                   <div class = "txt sub">{{ notification.timestamp }}</div>
+                    </a>
+                 </div>
+                {% endfor %}
+             {% else %}
+             <p>No</p>
+         
+           {% endif %}
+             </div>
+            </div>
+         </div>
+      </div>
+        </a>
+    </div>
+    <a href = "#"><i class="fas fa-edit"></i></a>
+    </div>
+    </header>
+
+{% endblock content %}

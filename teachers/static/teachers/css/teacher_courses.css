@@ -1,0 +1,77 @@
+.card .card-image {
+    flex-basis: 100%;
+    max-height: 30vh;
+    overflow: hidden;
+}
+
+.card .card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-body h5 {
+    color: #1d2634;
+    font-weight: bold;
+
+}
+
+.book-btn .btn {
+    width: 100%;
+    border-radius: 0;
+    background-color: #be0e0e;
+    color: #ffffff;
+    transition: all 0.3s ease 0s;
+    font-weight: 700;
+    border: 1px solid #fbd232;
+}
+
+.book-btn .btn:hover {
+    background-color: #921616;
+    color: #ffffff;
+}
+
+/* Service Category Style in service_by_category.html */
+.no-service {
+    width: 100%;
+    min-height: 30vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+}
+
+.no-service h2 {
+    font-size: 40px;
+    font-weight: 700;
+}
+
+/* Pagination Style Start */
+.page-link {
+    /* border: 1px solid black; */
+    color: #1d2634;
+}
+
+.page-link:hover {
+    background-color: #fbd232;
+    border: 1px solid #fbd232;
+}
+
+.page-link.active {
+    background-color: #fbd232;
+    border: 1px solid #fbd232;
+}
+
+.page-link:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+
+.page-item:first-child .page-link,
+.page-item:last-child .page-link {
+    border-radius: 0;
+}
+
+/* Pagination Style End */
